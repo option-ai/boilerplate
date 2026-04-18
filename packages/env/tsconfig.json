@@ -1,0 +1,3 @@
+{
+  "extends": "@lkpr/config/tsconfig.base.json"
+}

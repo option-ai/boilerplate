@@ -1,0 +1,24 @@
+{
+  "name": "@lkpr/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@lkpr/db": "workspace:*",
+    "@lkpr/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@lkpr/config": "workspace:*",
+    "typescript": "^5"
+  }
+}
