@@ -7,4 +7,5 @@ Steps to make this run:
 - Add the necessary envs
 - `bun run db:push`
 - Set up auth based on the requirements (e.g. orgs, oauth, roles, etc...)
+- Remove boilerplate stuff (e.g. design system, showcases, etc)
 - Instruct AI to do everything
