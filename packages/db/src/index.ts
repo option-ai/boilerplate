@@ -1,4 +1,4 @@
-import { env } from "@lkpr/env/server";
+import { env } from "@boilerplate/env/server";
 import { drizzle } from "drizzle-orm/node-postgres";
 
 import * as schema from "./schema";

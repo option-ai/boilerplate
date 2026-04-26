@@ -1,5 +1,5 @@
 {
-  "name": "@lkpr/auth",
+  "name": "@boilerplate/auth",
   "type": "module",
   "exports": {
     ".": {
@@ -11,14 +11,16 @@
   },
   "scripts": {},
   "dependencies": {
-    "@lkpr/db": "workspace:*",
-    "@lkpr/env": "workspace:*",
+    "@boilerplate/db": "workspace:*",
+    "@boilerplate/env": "workspace:*",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
+    "evlog": "^2.13.0",
+    "resend": "^4.0.0",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@lkpr/config": "workspace:*",
+    "@boilerplate/config": "workspace:*",
     "typescript": "^5"
   }
 }

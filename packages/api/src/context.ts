@@ -1,4 +1,6 @@
-import { auth } from "@lkpr/auth";
+import { auth } from "@boilerplate/auth";
+import { db } from "@boilerplate/db";
+import { createLogger, type RequestLogger } from "evlog";
 import type { Context as HonoContext } from "hono";
 
 export type CreateContextOptions = {
@@ -9,9 +11,12 @@ export async function createContext({ context }: CreateContextOptions) {
   const session = await auth.api.getSession({
     headers: context.req.raw.headers,
   });
+  const log: RequestLogger =
+    (context.get("log") as RequestLogger | undefined) ?? createLogger();
   return {
-    auth: null,
+    db,
     session,
+    log,
   };
 }
 

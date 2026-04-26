@@ -22,7 +22,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@lkpr/ui/*": ["../../packages/ui/src/*"]
+      "@boilerplate/ui/*": ["../../packages/ui/src/*"]
     }
   },
   "include": [

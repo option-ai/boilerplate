@@ -1,23 +1,29 @@
 import { trpcServer } from "@hono/trpc-server";
-import { createContext } from "@lkpr/api/context";
-import { appRouter } from "@lkpr/api/routers/index";
-import { auth } from "@lkpr/auth";
-import { env } from "@lkpr/env/server";
+import { createContext } from "@boilerplate/api/context";
+import { appRouter } from "@boilerplate/api/routers/index";
+import { auth } from "@boilerplate/auth";
+import { env, getTrustedAppOrigins } from "@boilerplate/env/server";
+import type { EvlogVariables } from "evlog/hono";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { logger } from "hono/logger";
 
-const app = new Hono();
+import { evlog } from "./evlog";
 
-app.use(logger());
+const app = new Hono<EvlogVariables>();
+const trustedAppOrigins = getTrustedAppOrigins(
+  env.CORS_ORIGIN,
+  env.CORS_EXTRA_ORIGINS
+);
+
+app.use(evlog);
 app.use(
   "/*",
   cors({
-    origin: env.CORS_ORIGIN,
+    origin: trustedAppOrigins,
     allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-  }),
+  })
 );
 
 app.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
@@ -29,7 +35,7 @@ app.use(
     createContext: (_opts, context) => {
       return createContext({ context });
     },
-  }),
+  })
 );
 
 app.get("/", (c) => {

@@ -1,5 +1,5 @@
 {
-  "name": "@lkpr/api",
+  "name": "@boilerplate/api",
   "type": "module",
   "exports": {
     ".": {
@@ -11,16 +11,17 @@
   },
   "scripts": {},
   "dependencies": {
-    "@lkpr/auth": "workspace:*",
-    "@lkpr/db": "workspace:*",
-    "@lkpr/env": "workspace:*",
+    "@boilerplate/auth": "workspace:*",
+    "@boilerplate/db": "workspace:*",
+    "@boilerplate/env": "workspace:*",
     "@trpc/client": "catalog:",
     "@trpc/server": "catalog:",
     "dotenv": "catalog:",
+    "evlog": "^2.13.0",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@lkpr/config": "workspace:*",
+    "@boilerplate/config": "workspace:*",
     "hono": "catalog:",
     "typescript": "^5"
   }

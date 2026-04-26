@@ -1,5 +1,5 @@
 {
-  "name": "@lkpr/db",
+  "name": "@boilerplate/db",
   "type": "module",
   "exports": {
     ".": {
@@ -16,14 +16,15 @@
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
-    "@lkpr/env": "workspace:*",
+    "@boilerplate/env": "workspace:*",
     "dotenv": "catalog:",
     "drizzle-orm": "^0.45.1",
     "pg": "^8.17.1",
+    "uuidv7": "^1.0.2",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@lkpr/config": "workspace:*",
+    "@boilerplate/config": "workspace:*",
     "@types/pg": "^8.16.0",
     "drizzle-kit": "^0.31.8",
     "typescript": "^5"

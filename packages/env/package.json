@@ -1,5 +1,5 @@
 {
-  "name": "@lkpr/env",
+  "name": "@boilerplate/env",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -14,7 +14,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@lkpr/config": "workspace:*",
+    "@boilerplate/config": "workspace:*",
     "@types/bun": "catalog:",
     "typescript": "^5"
   }

@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 
-import "../index.css";
-import Header from "@/components/header";
 import Providers from "@/components/providers";
+import { cn } from "@boilerplate/ui/lib/utils";
+import "../index.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -16,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "lkpr",
-  description: "lkpr",
+  title: "Boilerplate",
+  description: "This is a boilerplate",
 };
 
 export default function RootLayout({
@@ -26,13 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn("font-sans", inter.variable)}
+    >
+      <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <div className="grid grid-rows-[auto_1fr] h-svh">
-            <Header />
-            {children}
-          </div>
+          <div className="grid grid-rows-[auto_1fr] h-svh">{children}</div>
         </Providers>
       </body>
     </html>

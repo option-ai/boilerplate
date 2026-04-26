@@ -1,11 +1,11 @@
 {
-  "extends": "@lkpr/config/tsconfig.base.json",
+  "extends": "@boilerplate/config/tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react-jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
-      "@lkpr/ui/*": ["./src/*"]
+      "@boilerplate/ui/*": ["./src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

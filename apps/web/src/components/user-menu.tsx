@@ -1,4 +1,4 @@
-import { Button } from "@lkpr/ui/components/button";
+import { Button } from "@boilerplate/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,12 +7,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@lkpr/ui/components/dropdown-menu";
-import { Skeleton } from "@lkpr/ui/components/skeleton";
+} from "@boilerplate/ui/components/dropdown-menu";
+import { Skeleton } from "@boilerplate/ui/components/skeleton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { authClient } from "@/lib/auth-client";
+import { IconUserCircle } from "@tabler/icons-react";
 
 export default function UserMenu() {
   const router = useRouter();
@@ -32,10 +33,14 @@ export default function UserMenu() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" />}>
-        {session.user.name}
+      <DropdownMenuTrigger render={<Button variant="outline" size="icon-sm" />}>
+        <IconUserCircle />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-card">
+      <DropdownMenuContent
+        className="bg-card w-fit"
+        align="end"
+        sideOffset={12}
+      >
         <DropdownMenuGroup>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
