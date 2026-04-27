@@ -98,6 +98,34 @@ updatedAt: timestamp("updated_at", { withTimezone: true })
   .notNull(),
 ```
 
+## Audit columns
+
+- **Prefer** adding `createdBy` and `updatedBy` to tables that hold user-authored or user-mutated data — anything where "who did this?" is a question you'll plausibly want to answer later. Skip them where they don't fit: pure join tables, system-owned rows with no acting user, append-only event logs that already carry an `actorId`, or tables where every row is created by the same well-known process.
+- **Always** declare them as `text(...).references(() => user.id).notNull()` pointing at the Better Auth `user` table from `@boilerplate/db` when you do add them.
+- **Always** set `createdBy` on insert and `updatedBy` on every update from the resolved `ctx.userId`. Services receive `userId` as an argument — never read it from anywhere else.
+- **Always** pass `updatedBy` explicitly in every `db.update(...).set({ ... })` that mutates a row; there is no Drizzle equivalent of `$onUpdate` for this, so forgetting it leaves stale audit data.
+- **Never** retrofit the Better Auth tables (`user`, `session`, `account`, `verification`) with audit columns — they are managed by Better Auth's scaffolding.
+- **Never** default `createdBy` / `updatedBy` to a system/sentinel user to "make tests easier" — pass a real `userId` (seed one in test setup if needed).
+
+```ts
+import { user } from "./auth";
+
+createdBy: text("created_by")
+  .references(() => user.id)
+  .notNull(),
+updatedBy: text("updated_by")
+  .references(() => user.id)
+  .notNull(),
+```
+
+```ts
+// service
+await db
+  .update(posts)
+  .set({ status: "published", updatedBy: userId })
+  .where(eq(posts.id, postId));
+```
+
 ## Migrations
 
 **Migrations are handled by the human user, not by agents.** Your job stops at editing the schema file and (optionally) generating the SQL — never run `db:push` or `db:migrate`, and never apply schema changes against any database.
