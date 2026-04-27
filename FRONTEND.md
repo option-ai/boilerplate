@@ -70,6 +70,17 @@ packages/ui/src/
 - **Always** use the `<ModeToggle />` from `apps/web/src/components/mode-toggle.tsx` as the canonical theme switcher.
 - **Never** read or set `document.documentElement.classList` to toggle themes manually.
 
+## Building UI
+
+How to make new UI feel native to this codebase, not just "shadcn with a coat of paint."
+
+- **Always** prefer the semantic tokens defined in `globals.css` (`bg-background`, `text-foreground`, `text-muted-foreground`, `bg-card`, `bg-primary`, `text-primary-foreground`, `bg-accent`, `text-destructive`, `bg-muted`, …). They flip correctly between light and dark for free.
+- **Always** design and verify both light and dark mode. The app uses `next-themes` with `attribute="class"` and defaults to `system` — every screen must look right in both. A screen that only works in one mode is broken.
+- **Always** use the `neutral` palette when you genuinely need a raw Tailwind color and a semantic token doesn't fit (e.g. illustrations, data viz, a one-off accent). For accents prefer the chromatic palettes (`blue`, `emerald`, `amber`, `rose`, …) and pair `*-500/600` with their `*-100` or `*-950` counterparts so the choice reads in both modes.
+- **Never** use `slate`, `gray`, `zinc`, or `stone`. They drift from the project's tonal range and clash with the semantic tokens. `neutral` is the only generic grayscale palette allowed.
+- **Never** hardcode a hex / `rgb()` / `oklch()` color in `className` or `style`. If a value isn't in the theme, add a token to `globals.css` first.
+- **Always** keep spacing on Tailwind's scale (`gap-2`, `p-4`, `space-y-6`). No `p-[13px]` arbitrary values unless there's a specific reason — and if there is, leave a one-line comment.
+
 ## Styling — Tailwind v4
 
 - **Always** style with Tailwind utility classes. Tokens (colors, radii, shadows, fonts) are defined in `packages/ui/src/styles/globals.css` via `@theme` and `@custom-variant dark`.
